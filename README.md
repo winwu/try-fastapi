@@ -15,3 +15,9 @@ cd app
 uvicorn main:app --reload
 ```
 
+visit swagger index
+
+```
+http://127.0.0.1:8000/docs
+```
+

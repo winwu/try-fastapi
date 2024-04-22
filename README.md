@@ -1,5 +1,22 @@
 # Try fastapi
 
+
+## env requirement
+
+Python 3.9, venv... etc.
+
+- please ref requirements.txt
+- if using vscode, please install [Python environments in VS Code](https://code.visualstudio.com/docs/python/environments)
+
+
+## data source
+
+
+Please download [Airline dataset](https://www.kaggle.com/datasets/mohammadkaiftahir/airline-dataset)
+
+
+## usage - for developing in local
+
 ```
 cd ~./
 python3 -m venv .venv
@@ -9,10 +26,13 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-
-```
+```jsonc
 cd app
 uvicorn main:app --reload
+
+// or 
+
+uvicorn app.main:app --reload
 ```
 
 visit swagger index

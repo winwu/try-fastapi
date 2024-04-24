@@ -12,7 +12,7 @@ Python 3.9, venv... etc.
 ## data source
 
 
-Please download [Airline dataset](https://www.kaggle.com/datasets/mohammadkaiftahir/airline-dataset)
+<!--next phase: Please download [Airline dataset](https://www.kaggle.com/datasets/mohammadkaiftahir/airline-dataset)-->
 
 
 ## usage - for developing in local
@@ -52,3 +52,13 @@ docker build -t myimage .
 # start container
 docker run -d --name mycontainer -p 80:80 myimage
 ```
+
+## TODO
+
+* append complete owner data object in get /items response
+* pagination response
+* move from sqlite to mariadb (migration: https://alembic.sqlalchemy.org/en/latest/)
+* authentication (JWT) (https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/)
+* error response handler
+* serve static file
+

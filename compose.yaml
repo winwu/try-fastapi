@@ -1,0 +1,14 @@
+services:
+  web:
+    container_name: wuw-fastapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /code/app
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    environment:
+      DEBUG: 1
+    volumes:
+      - .:/code/app
+    ports:
+      - 9443:8000

@@ -11,9 +11,7 @@ Python 3.9, venv... etc.
 
 ## data source
 
-
 <!--next phase: Please download [Airline dataset](https://www.kaggle.com/datasets/mohammadkaiftahir/airline-dataset)-->
-
 
 ## usage - for developing in local
 
@@ -46,11 +44,13 @@ http://127.0.0.1:8000/docs
 ## run with docker
 
 ```
-# build image
-docker build -t myimage .
-
 # start container
-docker run -d --name mycontainer -p 80:80 myimage
+docker-compose up --build
+
+# then visit https://localhost:9443/
+
+# start container without build
+docker-compose up
 ```
 
 ## TODO

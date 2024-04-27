@@ -1,7 +1,6 @@
 # Try fastapi
 
-
-## env requirement
+## about env
 
 Python 3.9, venv... etc.
 
@@ -9,11 +8,7 @@ Python 3.9, venv... etc.
 - if using vscode, please install [Python environments in VS Code](https://code.visualstudio.com/docs/python/environments)
 
 
-## data source
-
-<!--next phase: Please download [Airline dataset](https://www.kaggle.com/datasets/mohammadkaiftahir/airline-dataset)-->
-
-## usage - for developing in local
+## Developing in local
 
 ```
 cd ~./
@@ -31,6 +26,9 @@ uvicorn main:app --reload
 // or 
 
 uvicorn app.main:app --reload
+
+// or run with ssl cert
+uvicorn app.main:app --reload --ssl-keyfile credential/example.key --ssl-certfile credential/example.crt
 ```
 
 visit swagger index
@@ -40,25 +38,47 @@ http://127.0.0.1:8000/docs
 ```
 
 
+## Developing in docker
 
-## run with docker
+### Generate ssl cert, key and csr under "credential" folder
 
 ```
-# start container
+# just example cli:
+cd credential
+openssl req -new -newkey rsa:4096 -nodes -keyout example.key -out example.csr   
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout example.key -out example.crt
+```
+
+### build image and container
+
+```
 docker-compose up --build
+```
 
-# then visit https://localhost:9443/
-
-# start container without build
+```
+# run
 docker-compose up
 ```
 
-## TODO
+```
+# if you make some changes in compose.yaml
 
-* append complete owner data object in get /items response
-* pagination response
-* move from sqlite to mariadb (migration: https://alembic.sqlalchemy.org/en/latest/)
-* authentication (JWT) (https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/)
-* error response handler
-* serve static file
+docker-compose build [nginx|fastapiweb]
+```
 
+### Visit web which is served by uvicorn
+
+* http://localhost:9443/ 
+
+### Visit web which is proxy by Nginx
+
+edit /etc/hosts
+
+```
+127.0.0.1 fastapi.winwu.dev
+```
+
+Both 80 and 443 port are available:
+
+* visit http://fastapi.winwu.dev/ (http://localhost)
+* visit https://fastapi.winwu.dev/

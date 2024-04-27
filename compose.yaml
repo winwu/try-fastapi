@@ -14,6 +14,10 @@ services:
         "--port",
         "8000",
         "--reload",
+        # "--ssl-keyfile",
+        # "credential/example.key",
+        # "--ssl-certfile",
+        # "credential/example.crt",
       ]
     environment:
       DEBUG: 1
@@ -30,6 +34,7 @@ services:
       - 443:443
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      # - letsencrypt:/etc/letsencrypt
+      # mount certificates in Nginx image
+      - ./credential:/etc/nginx/certs
     depends_on:
       - fastapiweb

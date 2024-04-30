@@ -1,4 +1,12 @@
+from typing import Union
 from pydantic import BaseModel, EmailStr
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    username: Union[str, None] = None
 
 class ItemBase(BaseModel):
     title: str
@@ -15,17 +23,15 @@ class ItemCreate(ItemBase):
     pass
 
 
-class UserBase(BaseModel):
-    email: EmailStr
-
-class UserCreate(UserBase):
+class UserCreate(BaseModel):
     password: str
+    username: str
+    email: Union[EmailStr | None] = None
+    disabled: Union[bool, None] = None
 
-class User(UserBase):
+class User(UserCreate):
     id: int
-    is_active: bool 
     items: list[Item] = []
 
     class Config:
         from_attributes = True
-

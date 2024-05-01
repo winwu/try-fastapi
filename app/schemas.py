@@ -1,5 +1,5 @@
 from typing import Union
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 
 class Token(BaseModel):
     access_token: str
@@ -24,7 +24,7 @@ class ItemCreate(ItemBase):
 
 
 class UserCreate(BaseModel):
-    password: str
+    password: str = Field(exclude=True)
     username: str
     email: Union[EmailStr | None] = None
     disabled: Union[bool, None] = None
